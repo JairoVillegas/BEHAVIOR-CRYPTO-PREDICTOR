@@ -23,10 +23,10 @@ def build_supervised_dataset(
     # Ordenamos por moneda y fecha
     df = df.sort_values(by=["coin", "datetime"])
 
-    # Precio futuro por moneda (shift negativo)
+    # Precio futuro por moneda (shift en 0 para tener las predicciones desde la fecha actual)
     df["future_price"] = (
         df.groupby("coin")["price"]
-        .shift(-horizon)
+        .shift(- 5 )
     )
 
     # Variable objetivo: 1 si el precio futuro es mayor al actual, 0 si no.
